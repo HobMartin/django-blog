@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Публікації{% endblock title %}
+
+{% block content %}
+<h1 class="page-title">
+    Публікації
+</h1>
+
+{% if category %}
+<h3 class="page-subtitle">
+    {{ category }}
+</h3>
+{% endif %}
+
+<div class="articles-container">
+    {% for item in items %}
+    <a class="articles-row-link" href="{{ item.get_absolute_url }}">
+        <div class="articles-row"
+            style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), url('{{ item.images.all.0.image.url }}')">
+            <div class="date">
+                {{ item.pub_date|date:"j E Y"|safe|linebreaks }}
+            </div>
+            <h4 class="title">{{ item.title }}</h4>
+            <p class="description">
+                {{ item.description|safe|escape|striptags|truncatewords_html:32 }}
+            </p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock content %}

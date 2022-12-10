@@ -1,15 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-</head>
-
-<body>
-    <h1>Home Page</h1>
-</body>
-
-</html>
+{% extends "base.html" %}{% load static %}
+{% block title %}Home Page{% endblock title %}
+{% block content %}{% spaceless %}
+<nav class="categories-container">
+    {% if categories %}
+    <div class="categories">
+        <ul class="categories-list">
+            <li class="categories-list_item"><a href="{% url 'articles-list' %}">
+                    Всі
+                </a></li>
+            {% for item in categories %}
+            <li class="categories-list_item"><a href="{{ item.get_absolute_url }}">
+                    {{ item.category }}
+                </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</nav>
+{% if articles %}
+<div class="articles">
+    {% for item in articles %}
+    <div class="article-block">
+        <div class="info">
+            <h5 class="category">{{item.category}}</h5>
+            <div class="date">
+                {{ item.pub_date|date:"j E Y"|safe|linebreaks }}
+            </div>
+        </div>
+        <a class="article-title" href="{{ item.get_absolute_url }}">
+            <h4>{{ item.title }}</h4>
+        </a>
+        <p class="description">
+            {{ item.description|safe|escape|striptags|truncatewords_html:32 }}
+        </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endspaceless %}
+{% endblock content %}
