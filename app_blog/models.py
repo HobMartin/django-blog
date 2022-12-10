@@ -11,10 +11,10 @@ class Category(models.Model):
     slug = models.SlugField("Slug", null=True)
 
     class Meta:
-        verbose_name = "Category for publication"
-        verbose_name_plural = "Category for publication"
+        verbose_name = "Категорія для публікації"
+        verbose_name_plural = "Категорії для публікації"
 
-    def str(self):
+    def __str__(self) -> str:
         return self.category
 
 
@@ -39,7 +39,7 @@ class Article(models.Model):
         verbose_name = "Стаття"
         verbose_name_plural = "Статті"
 
-    def str(self):
+    def __str__(self):
         return self.title
 
     def get_absolute_url(self):
@@ -69,10 +69,10 @@ class ArticleImage(models.Model):
     )
 
     class Meta:
-        verbose_name = "Picture for article"
-        verbose_name_plural = "Picture for article"
+        verbose_name = "Фото для статті"
+        verbose_name_plural = "Фото для статті"
 
-    def str(self):
+    def __str__(self):
         return self.title
 
     @property
