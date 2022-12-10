@@ -5,12 +5,13 @@ name = "pypi"
 
 [packages]
 django = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.10"
-
 
 [scripts]
 server-local = "python manage.py runserver"
