@@ -1,0 +1,10 @@
+{% spaceless %}
+{% load static %}
+<div class="spotlight-group" id="my-gallery">
+    {% for image in images %}
+    <a class="spotlight" href='{{ image.image.url }}'>
+        <img class="image" src='{{ image.image.url }}' alt="{{ image.title }}" data-caption="{{ image.title }}">
+    </a>
+    {% endfor %}
+</div>
+{% endspaceless %}
